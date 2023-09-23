@@ -168,6 +168,25 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        /*
+         * Shared Services for Hex architecture - API
+         */
+        Hex\Shared\Infrastructure\Services\DependencyServiceProvider::class,
+
+        /*
+         * Routes for Hex architecture - API
+         */
+        /*----------------------- WEB -----------------------*/
+        Hex\Web\Authentication\Login\Infrastructure\Services\RouteServiceProvider::class,
+
+        /*
+        * Repositories for Hex architecture - API
+        */
+        /*----------------------- WEB -----------------------*/
+        Hex\Web\Authentication\Login\Infrastructure\Services\DependencyServiceProvider::class,
+
     ])->toArray(),
 
     /*
