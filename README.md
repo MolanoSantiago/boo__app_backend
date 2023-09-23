@@ -67,4 +67,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Boo
 
-API Rest in charge of managing the Boo reservation system
+Hi! Welcome to the API Rest in charge of managing the Boo reservation system
