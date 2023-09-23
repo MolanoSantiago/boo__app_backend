@@ -82,10 +82,10 @@ class HandlerException extends ExceptionHandler
     {
         return response()->json([
             'message' => 'Sin autentificar',
-            'status' => HttpCodes::HTTP_FORBIDDEN,
+            'status' => HttpCodes::HTTP_UNAUTHORIZED,
             'code' => null,
             'errors' => true,
-        ], HttpCodes::HTTP_FORBIDDEN);
+        ], HttpCodes::HTTP_UNAUTHORIZED);
     }
 
     private function handleInvalidArgumentException(InvalidArgumentException $e): JsonResponse
