@@ -14,6 +14,20 @@ class SaveUserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $token = $this->createToken('auth-token')->plainTextToken;
+
+        return [
+            'user' => [
+                'id' => $this['id'],
+                'name' => $this['name'],
+                'surname' => $this['surname'],
+                'email' => $this['email'],
+                'user_type' => $this['userType'],
+                'created_at' => $this['created_at'],
+                'updated_at' => $this['updated_at']
+            ],
+            'access_token' => $token,
+            'token_type' => 'Bearer'
+        ];
     }
 }

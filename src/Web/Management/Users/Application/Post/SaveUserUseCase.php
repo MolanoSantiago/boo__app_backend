@@ -51,7 +51,7 @@ final class SaveUserUseCase
 
         $this->logger->info("[WEB][MANAGEMENT][USER:$name]: was successfully saved");
 
-        // $this->events->call(new Registered($user));
+        $this->events->call(new Registered($user));
 
         return $user;
     }

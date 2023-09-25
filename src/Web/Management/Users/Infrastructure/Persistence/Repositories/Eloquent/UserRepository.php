@@ -3,8 +3,6 @@
 namespace Hex\Web\Management\Users\Infrastructure\Persistence\Repositories\Eloquent;
 
 use App\Models\User;
-use Hex\Shared\Domain\Constants\ExceptionMessages;
-use Hex\Shared\Domain\Constants\HttpCodes;
 use Hex\Shared\Domain\Exceptions\CustomException;
 use Hex\Web\Management\Users\Domain\Contracts\UserRepositoryInterface;
 use Hex\Web\Management\Users\Domain\User as UserEntity;
@@ -25,11 +23,15 @@ class UserRepository implements UserRepositoryInterface
     {
         $existingUser = $this->findUserByEmail($user->getEmail());
 
-        if ($existingUser) throw new CustomException(ExceptionMessages::ERROR_USER_UNIQUE, HttpCodes::HTTP_BAD_REQUEST);
+        if ($existingUser) return null;
 
         $newUser = $this->model->create($user->handler());
 
-        return ($newUser) ?: null;
+        if (!$newUser) return null;
+
+        $newUser->load('userType:id,name');
+
+        return $newUser;
     }
 
     private function findUserByEmail(string $email): ?User

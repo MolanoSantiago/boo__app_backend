@@ -26,6 +26,8 @@ class LoginRepository implements LoginRepositoryInterface
 
         $token = $user->createToken('auth-token')->plainTextToken;
 
+        $user->load('userType:id,name');
+
         return [
             'user' => $user->toArray(),
             'access_token' => $token,
