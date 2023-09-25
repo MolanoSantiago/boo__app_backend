@@ -26,13 +26,13 @@ final class LoginUseCase
      */
     public function __invoke(string $email, string $password): ?array
     {
-        $response = $this->repository->login(new Login(new Email($email), new Password($password)));
+        $login = $this->repository->login(new Login(new Email($email), new Password($password)));
 
-        if (!$response) {
+        if (is_null($login)) {
             throw new CustomException(ExceptionMessages::INVALID_CREDENTIALS, HttpCodes::HTTP_UNAUTHORIZED);
         }
-        $this->logger->info("[WEB][AUTHENTICATION][LOGIN][EMAIL:$email]: has successfully logged in.");
+        $this->logger->info("[WEB][AUTHENTICATION][LOGIN][EMAIL:$email]: has successfully logged in");
 
-        return $response;
+        return $login;
     }
 }

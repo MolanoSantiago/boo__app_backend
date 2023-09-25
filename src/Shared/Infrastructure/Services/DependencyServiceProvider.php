@@ -22,5 +22,10 @@ final class DependencyServiceProvider extends ServiceProvider
             \Hex\Shared\Domain\Contracts\MessagingInterface::class,
             \Hex\Shared\Infrastructure\Messaging\CustomMessaging::class
         );
+
+        $this->app->bind(
+            \Hex\Shared\Domain\Contracts\EventsInterface::class,
+            \Hex\Shared\Infrastructure\Events\CustomEvent::class
+        );
     }
 }

@@ -180,12 +180,14 @@ return [
          */
         /*----------------------- WEB -----------------------*/
         Hex\Web\Authentication\Login\Infrastructure\Services\RouteServiceProvider::class,
+        Hex\Web\Management\Users\Infrastructure\Services\RouteServiceProvider::class,
 
         /*
         * Repositories for Hex architecture - API
         */
         /*----------------------- WEB -----------------------*/
         Hex\Web\Authentication\Login\Infrastructure\Services\DependencyServiceProvider::class,
+        Hex\Web\Management\Users\Infrastructure\Services\DependencyServiceProvider::class,
 
     ])->toArray(),
 

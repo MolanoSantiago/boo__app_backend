@@ -17,21 +17,24 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'id' => 1,
-                'name' => 'Super User',
+                'name' => 'Superadmin',
+                'surname' => 'User',
                 'email' => 'super@example.com',
                 'password' => Hash::make('super123'),
                 'user_type_id' => UserTypeEnum::id(UserTypeEnum::SUPER)
             ],
             [
                 'id' => 2,
-                'name' => 'Admin User',
+                'name' => 'Administrator',
+                'surname' => 'user',
                 'email' => 'admin@example.com',
                 'password' => Hash::make('admin123'),
                 'user_type_id' => UserTypeEnum::id(UserTypeEnum::ADMIN)
             ],
             [
                 'id' => 3,
-                'name' => 'Customer User',
+                'name' => 'Customer',
+                'surname' => 'User',
                 'email' => 'customer@example.com',
                 'password' => Hash::make('customer123'),
                 'user_type_id' => UserTypeEnum::id(UserTypeEnum::CUSTOMER)
