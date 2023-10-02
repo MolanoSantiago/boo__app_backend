@@ -5,7 +5,6 @@ namespace Hex\Web\Management\Users\Application\Post;
 use App\Models\User as UserModel;
 use Hex\Shared\Domain\Constants\ExceptionMessages;
 use Hex\Shared\Domain\Constants\HttpCodes;
-use Hex\Shared\Domain\Contracts\EventsInterface;
 use Hex\Shared\Domain\Contracts\LoggerInterface;
 use Hex\Shared\Domain\Exceptions\CustomException;
 use Hex\Web\Management\Users\Domain\Contracts\UserRepositoryInterface;
@@ -14,15 +13,12 @@ use Hex\Web\Shared\ValueObjects\Email;
 use Hex\Web\Shared\ValueObjects\Name;
 use Hex\Web\Shared\ValueObjects\Password;
 use Hex\Web\Shared\ValueObjects\Surname;
-use Hex\Web\Shared\ValueObjects\UserTypeId;
-use Illuminate\Auth\Events\Registered;
 
 final class SaveUserUseCase
 {
     public function __construct(
         private readonly UserRepositoryInterface $repository,
         private readonly LoggerInterface         $logger,
-        private readonly EventsInterface         $events
     )
     {
         // Intentionally not implement
@@ -37,21 +33,17 @@ final class SaveUserUseCase
         $surname = $request['surname'];
         $email = $request['email'];
         $password = $request['password'];
-        $userTypeId = $request['user_type_id'];
 
         $user = $this->repository->save(new UserEntity(
             new Name($name),
             new Surname($surname),
             new Email($email),
-            new Password($password),
-            new UserTypeId($userTypeId)
+            new Password($password)
         ));
 
         if (is_null($user)) throw new CustomException(ExceptionMessages::ERROR_USER_SAVE, HttpCodes::HTTP_INTERNAL_SERVER_ERROR);
 
         $this->logger->info("[WEB][MANAGEMENT][USER:$name]: was successfully saved");
-
-        $this->events->call(new Registered($user));
 
         return $user;
     }

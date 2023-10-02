@@ -13,11 +13,11 @@ final class User
     private array $handler;
 
     public function __construct(
-        private readonly Name       $name,
-        private readonly Surname    $surname,
-        private readonly Email      $email,
-        private readonly Password   $password,
-        private readonly UserTypeId $userTypeId
+        private readonly Name        $name,
+        private readonly Surname     $surname,
+        private readonly Email       $email,
+        private readonly Password    $password,
+        private readonly ?UserTypeId $userTypeId = new UserTypeId(3)
     )
     {
         $this->handler = [
